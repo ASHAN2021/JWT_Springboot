@@ -41,7 +41,7 @@ public class JWTService {
                     .parseSignedClaims(token).getPayload().getSubject();
 
         } catch (Exception e) {
-            return "invalid token";
+            return null;
         }
     }
 }

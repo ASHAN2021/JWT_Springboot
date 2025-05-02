@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document(collation = "user")
+@Document(collection = "userEntity")
 public class UserEntity {
 
     @Id
@@ -16,8 +16,8 @@ public class UserEntity {
     private String username;
     private String password;
 
-    public UserEntity(String id, String name, String email, String username, String password) {
-        this.id = id;
+    public UserEntity( String name, String email, String username, String password) {
+
         this.name = name;
         this.email = email;
         this.username = username;
