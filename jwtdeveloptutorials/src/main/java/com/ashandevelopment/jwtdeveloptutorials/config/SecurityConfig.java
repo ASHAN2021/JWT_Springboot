@@ -36,12 +36,11 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(c->c.disable())
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(r->r.requestMatchers("/login","/api/v1/auth/login ")
+        .authorizeHttpRequests(r->r.requestMatchers("/login","/api/v1/auth/login","/api/v1/auth/register")
                 .permitAll().anyRequest()
                 .authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider())
-                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 

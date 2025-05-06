@@ -2,6 +2,8 @@ package com.ashandevelopment.jwtdeveloptutorials.controller;
 
 import com.ashandevelopment.jwtdeveloptutorials.dto.LoginRequestDTO;
 import com.ashandevelopment.jwtdeveloptutorials.dto.LoginResponseDTO;
+import com.ashandevelopment.jwtdeveloptutorials.dto.RegisterRequestDTO;
+import com.ashandevelopment.jwtdeveloptutorials.dto.RegisterResponseDTO;
 import com.ashandevelopment.jwtdeveloptutorials.entity.UserEntity;
 import com.ashandevelopment.jwtdeveloptutorials.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity user) {
+    public UserEntity createUser(@RequestBody RegisterRequestDTO user) {
         return authService.createUser(user);
     }
 
@@ -34,6 +36,17 @@ public class AuthController {
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginData){
 
         LoginResponseDTO res = authService.login(loginData);
+        if(res.getError() != null) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisterResponseDTO> login(@RequestBody RegisterRequestDTO registerData){
+
+        RegisterResponseDTO res = authService.register(registerData);
         if(res.getError() != null) {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
         }
