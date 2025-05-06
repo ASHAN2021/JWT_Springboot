@@ -2,6 +2,7 @@ package com.ashandevelopment.jwtdeveloptutorials.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -15,6 +16,9 @@ public class UserEntity {
     @Indexed(unique = true)
     private String username;
     private String password;
+
+    @DBRef
+    private ProfileEntity profile;
 
     public UserEntity( String name, String email, String username, String password) {
 
@@ -62,5 +66,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ProfileEntity getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
     }
 }
